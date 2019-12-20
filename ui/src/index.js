@@ -1,23 +1,17 @@
 import { version } from '../package.json'
-
-import Component from './components/Component'
-
+import ExampleViewer from './components/ExampleViewer'
 
 export {
   version,
-
-  Component
-  
+  ExampleViewer
 }
 
 export default {
   version,
-
-  Component,
-  
+  ExampleViewer,
 
   install (Vue) {
-    Vue.component(Component.name, Component)
-    
+    Vue.component(ExampleViewer.name, ExampleViewer)
+
   }
 }
