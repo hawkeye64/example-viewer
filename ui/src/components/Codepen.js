@@ -10,7 +10,12 @@ export default {
     cssPath: Array
   },
 
-  data: () => ({ active: false, parts: {} }),
+  data () {
+    return {
+      active: false,
+      parts: {}
+    }
+  },
 
   computed: {
     cssResources () {
