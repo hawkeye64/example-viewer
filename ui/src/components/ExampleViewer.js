@@ -12,12 +12,14 @@ import {
   QToolbar,
   QToolbarTitle,
   QTooltip,
+  copyToClipboard,
   openURL
 } from 'quasar'
 
 import { QRibbon } from '@quasar/quasar-ui-qribbon'
 import { QMarkdown } from '@quasar/quasar-ui-qmarkdown'
 import { slugify } from '../utils/pageUtils'
+import Codepen from './Codepen'
 
 export default {
   name: 'ExampleViewer',
@@ -48,8 +50,33 @@ export default {
       type: String,
       default: '#a0a0a0'
     },
-    githubUrl: String,
-    noEdit: Boolean
+    locationUrl: String,
+    locationIcon: {
+      type: String,
+      default: 'fab fa-github'
+    },
+    noEdit: Boolean,
+    jsPaths: Array,
+    cssPaths: Array,
+    noCopy: Boolean,
+    copyIcon: {
+      type: String,
+      default: 'content_copy'
+    },
+    copyLabel: {
+      type: String,
+      default: 'Copy to clipboard'
+    },
+    copyResponse: {
+      type: String,
+      default: 'Copied to clipboard'
+    },
+    noLineNumbers: Boolean,
+    noAnchor: Boolean,
+    anchorResponse: {
+      type: String,
+      default: 'Anchor has been copied to clipboard'
+    }
   },
 
   data () {
@@ -86,36 +113,34 @@ export default {
     }
   },
 
-  watch: {
-    expanded (val) {
-      console.log('expanded:', val)
-    }
-  },
-
   methods: {
     slugify,
 
     copyHeading () {
-      // const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
+      if (this.noAnchor === true) {
+        return
+      }
 
-      // var textArea = document.createElement('textarea')
-      // textArea.className = 'fixed-top'
-      // textArea.value = text
-      // document.body.appendChild(textArea)
-      // textArea.focus()
-      // textArea.select()
+      const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
 
-      // document.execCommand('copy')
-      // document.body.removeChild(textArea)
+      const textArea = document.createElement('textarea')
+      textArea.className = 'fixed-top'
+      textArea.value = text
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
 
-      // this.$q.notify({
-      //   message: 'Anchor has been copied to clipboard.',
-      //   color: 'white',
-      //   textColor: 'primary',
-      //   icon: 'done',
-      //   position: 'top',
-      //   timeout: 2000
-      // })
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+
+      this.$q.notify({
+        message: this.anchorResponse,
+        color: this.$q.dark.isActive ? 'grey-10' : 'white',
+        textColor: this.$q.dark.isActive ? 'amber' : 'primary',
+        icon: 'done',
+        position: 'top',
+        timeout: 2000
+      })
     },
 
     parseComponent (comp) {
@@ -141,12 +166,25 @@ export default {
       return parsed[1] || ''
     },
 
-    openGitHub () {
-      openURL(`${githubUrl}/${this.file}.vue`)
+    openLocation () {
+      openURL(`${this.locationUrl}/${this.file}.vue`)
     },
 
     openCodepen () {
-      // this.$refs.codepen.open(this.parts)
+      this.$refs.codepen.open(this.parts)
+    },
+
+    __copy (tab) {
+      copyToClipboard(this.parts[this.tabs[tab]])
+
+      this.$q.notify({
+        message: this.copyResponse,
+        color: this.$q.dark.isActive ? 'grey-10' : 'white',
+        textColor: this.$q.dark.isActive ? 'amber' : 'primary',
+        icon: 'done',
+        position: 'top',
+        timeout: 2000
+      })
     },
 
     __renderRibbon (h) {
@@ -161,7 +199,7 @@ export default {
         }
       }, [
         h(QToolbarTitle, {
-          staticClass: 'example-title',
+          staticClass: this.noAnchor !== true ? 'example-title' : '',
           on: {
             click: this.copyHeading
           }
@@ -180,15 +218,15 @@ export default {
         h('div', {
           staticClass: 'col-auto'
         }, [
-          this.githubUrl && h(QBtn, {
+          this.locationUrl && h(QBtn, {
             props: {
               dense: true,
               flat: true,
               round: true,
-              icon: 'fab fa-github'
+              icon: this.locationIcon
             },
             on: {
-              click: this.openGitHub
+              click: this.openLocation
             }
           }),
           this.noEdit !== true && h(QBtn, {
@@ -243,6 +281,30 @@ export default {
       ])
     },
 
+    __renderCopy (h, tab) {
+      if (this.noCopy !== true) {
+        return h(QBtn, {
+          staticClass: 'absolute',
+          style: {
+            top: '15px',
+            right: '15px'
+          },
+          props: {
+            color: this.$q.dark.isActive ? 'amber' : 'primary',
+            dense: true,
+            flat: true,
+            round: true,
+            icon: this.copyIcon
+          },
+          on: {
+            click: v => { this.__copy(tab) }
+          }
+        }, [
+          h(QTooltip, this.copyLabel)
+        ])
+      }
+    },
+
     __renderTabPanel (h) {
       const type = {}
       type.style = '```css\n'
@@ -252,16 +314,20 @@ export default {
 
       return [ ...Object.keys(this.tabs).map(tab => h(QTabPanel, {
         key: `panel-${this.tabs[tab]}`,
-        staticClass: 'q-pa-none',
+        staticClass: 'q-pa-none relative-position',
         props: {
           name: this.tabs[tab]
         }
       }, [
         h(QMarkdown, {
-          staticClass: ''
+          staticClass: '',
+          props: {
+            noLineNumbers: this.noLineNumbers
+          }
         }, [
           `${type[this.tabs[tab]]}${this.parts[this.tabs[tab]]}${end}`
-        ])
+        ]),
+        this.__renderCopy(h, tab)
       ]))]
     },
 
@@ -287,27 +353,25 @@ export default {
     },
 
     __renderExpansionItem (h) {
-      return this.expanded && h('div', {
-      }, [
-        this.__renderInnerCard(h)
-      ])
-    },
-
-    __renderComponent (h) {
       return h(QSlideTransition, [
-        h('div', {
-          staticClass: 'row'
+        this.expanded && h('div', {
         }, [
-          h(this.component, {
-            staticClass: 'col'
-          })
+          this.__renderInnerCard(h)
         ])
       ])
     },
 
-    __renderCard (h) {
-      const slot = this.$scopedSlots.default
+    __renderComponent (h) {
+      return h('div', {
+        staticClass: 'row'
+      }, [
+        h(this.component, {
+          staticClass: 'col'
+        })
+      ])
+    },
 
+    __renderCard (h) {
       return h(QCard, {
         staticClass: 'no-shadow',
         props: {
@@ -322,6 +386,18 @@ export default {
           this.__renderComponent(h)
         ])
       ])
+    },
+
+    __renderCodepen (h) {
+      return h(Codepen, {
+        ref: 'codepen',
+        props: {
+          title: this.title,
+          slugifiedTitle: this.slugifiedTitle,
+          jsPaths: this.jsPaths,
+          cssPaths: this.cssPaths
+        }
+      })
     }
   },
 
@@ -330,7 +406,8 @@ export default {
       id: this.slugifiedTitle,
       staticClass: 'q-pa-md overflow-auto'
     }, [
-      this.__renderCard(h)
+      this.__renderCard(h),
+      this.__renderCodepen(h)
     ])
   }
 }
