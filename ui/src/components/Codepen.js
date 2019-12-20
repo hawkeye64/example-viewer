@@ -7,7 +7,7 @@ export default {
     title: String,
     slugifiedTitle: String,
     jsPaths: Array,
-    cssPath: Array
+    cssPaths: Array
   },
 
   data () {
@@ -107,10 +107,10 @@ export default {
 </div>`,
         css: this.css,
         css_pre_processor: this.cssPreprocessor,
-        css_external: cssResources,
+        css_external: this.cssResources,
         js: this.js,
         js_pre_processor: 'babel',
-        js_external: jsResources,
+        js_external: this.jsResources,
         editors: this.editors
       }
       return JSON.stringify(data)
