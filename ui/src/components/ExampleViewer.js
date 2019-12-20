@@ -75,7 +75,7 @@ export default {
     noAnchor: Boolean,
     anchorResponse: {
       type: String,
-      default: 'Anchor has been copied to clipboard'
+      default: 'Anchor copied to clipboard'
     }
   },
 
@@ -91,16 +91,16 @@ export default {
 
   mounted () {
     import(
-      /* webpackChunkName: "example" */
+      /* webpackChunkName: "examples" */
       /* webpackMode: "lazy-once" */
-      `pages/${this.file}.vue`
+      `examples/${this.file}.vue`
     ).then(comp => {
       this.component = comp.default
 
       import(
-        /* webpackChunkName: "example-source" */
+        /* webpackChunkName: "examples-source" */
         /* webpackMode: "lazy-once" */
-        `!raw-loader!pages/${this.file}.vue`
+        `!raw-loader!examples/${this.file}.vue`
       ).then(comp => {
         this.parseComponent(comp.default)
       })
@@ -109,7 +109,7 @@ export default {
 
   computed: {
     slugifiedTitle () {
-      return this.slugify(this.title)
+      return this.slugify('example-' + this.title)
     }
   },
 
@@ -259,6 +259,7 @@ export default {
 
     __renderTabs (h) {
       return h(QTabs, {
+        staticClass: 'text-caption' + (!this.$q.dark.isActive ? ' bg-grey-2 text-grey-7' : ''),
         props: {
           value: this.currentTab,
           align: 'left',
@@ -371,7 +372,15 @@ export default {
       ])
     },
 
+    __renderSlot (h, slot) {
+      return h(QCardSection, [
+        slot()
+      ])
+    },
+
     __renderCard (h) {
+      const slot = this.$scopedSlots.default
+
       return h(QCard, {
         staticClass: 'no-shadow',
         props: {
@@ -382,7 +391,14 @@ export default {
         this.__renderToolbar(h),
         h(QSeparator),
         this.__renderExpansionItem(h),
-        h(QCardSection, [
+        slot ? this.__renderSlot(h, slot) : void 0,
+        slot ? h(QSeparator) : void 0,
+        h(QCardSection, {
+          staticClass: 'no-shadow',
+          style: {
+            padding: 0
+          }
+        }, [
           this.__renderComponent(h)
         ])
       ])
@@ -403,8 +419,10 @@ export default {
 
   render (h) {
     return h('section', {
-      id: this.slugifiedTitle,
-      staticClass: 'q-pa-md overflow-auto'
+      staticClass: 'q-pa-md overflow-auto',
+      attrs: {
+        id: this.slugifiedTitle
+      }
     }, [
       this.__renderCard(h),
       this.__renderCodepen(h)

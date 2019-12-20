@@ -31,7 +31,7 @@ Vue.use(Plugin)
 <style src="quasar-ui-example-viewer/dist/index.css"></style>
 
 <script>
-import { Component as ExampleViewer } from 'quasar-ui-example-viewer'
+import { ExampleViewer } from 'quasar-ui-example-viewer'
 
 export default {
   components: {
@@ -57,7 +57,7 @@ Vue.use(Plugin)
 <style src="quasar-ui-example-viewer/dist/index.css"></style>
 
 <script>
-import { Component as ExampleViewer } from 'quasar-ui-example-viewer'
+import { ExampleViewer } from 'quasar-ui-example-viewer'
 
 export default {
   components: {

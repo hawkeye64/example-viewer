@@ -2,12 +2,14 @@
   <q-page padding class="row justify-center">
     <example-viewer
       title="Code Test"
-      file="Index"
+      file="DayViewBasic"
       :location-url="locationUrl"
       :js-paths="jsPaths"
       :css-paths="cssPaths"
-      style="max-width: 800px;"
-    />
+      style="max-width: 800px; width: 100%;"
+    >
+    <p>Testing the slot</p>
+    </example-viewer>
   </q-page>
 </template>
 

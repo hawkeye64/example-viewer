@@ -1,5 +1,3 @@
-import { Quasar } from 'quasar'
-
 export default {
   name: 'Codepen',
 
@@ -21,14 +19,14 @@ export default {
     cssResources () {
       return [
         'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-        `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.min.css`
+        `https://cdn.jsdelivr.net/npm/quasar@latest/dist/quasar.min.css`
       ].concat(this.cssPaths).join(';')
     },
 
     jsResources () {
       return [
         'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
-        `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.umd.min.js`
+        `https://cdn.jsdelivr.net/npm/quasar@latest/dist/quasar.umd.min.js`
       ].concat(this.jsPaths).join(';')
     },
 

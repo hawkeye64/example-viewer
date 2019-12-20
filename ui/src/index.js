@@ -3,7 +3,7 @@ import ExampleViewer from './components/ExampleViewer'
 
 export {
   version,
-  ExampleViewer
+  ExampleViewer,
 }
 
 export default {
@@ -12,6 +12,5 @@ export default {
 
   install (Vue) {
     Vue.component(ExampleViewer.name, ExampleViewer)
-
   }
 }

@@ -1,12 +1,14 @@
 {
   "name": "quasar-ui-example-viewer",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
-  "description": "My awesome component",
+  "description": "Display Vue code examples with template, script and style parts",
   "license": "MIT",
   "module": "dist/index.esm.js",
   "main": "dist/index.common.js",
   "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "lint-fix": "eslint --ext .js,.vue src --fix",
     "dev": "cd dev && yarn dev && cd ..",
     "dev:umd": "yarn build && node build/script.open-umd.js",
     "dev:ssr": "cd dev && yarn 'dev:ssr' && cd ..",
@@ -17,36 +19,41 @@
     "build:js": "node build/script.javascript.js",
     "build:css": "node build/script.css.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": ""
   },
   "bugs": "",
   "homepage": "",
+  "dependencies": {
+    "raw-loader": "^4.0.0"
+  },
   "devDependencies": {
     "@rollup/plugin-buble": "^0.20.0",
     "@rollup/plugin-json": "^4.0.0",
-    "autoprefixer": "^9.6.1",
-    "chalk": "^2.4.2",
+    "autoprefixer": "^9.7.3",
+    "chalk": "^3.0.0",
     "cssnano": "^4.1.10",
     "fs-extra": "^8.1.0",
-    "node-sass": "^4.0.0",
-    "open": "^6.4.0",
-    "postcss": "^7.0.18",
+    "node-sass": "^4.13.0",
+    "open": "^7.0.0",
+    "postcss": "^7.0.25",
     "postcss-rtl": "^1.5.0",
-    "quasar": "^1.0.0",
+    "quasar": "^1.5.10",
     "rimraf": "^3.0.0",
-    "rollup": "^1.21.3",
+    "rollup": "^1.27.13",
     "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-es": "^3.3.9",
     "zlib": "^1.0.5"
   },
+  "peerDependencies": {
+    "@quasar/quasar-ui-qmarkdown": "^1.0.0",
+    "@quasar/quasar-ui-qribbon": "^1.0.0"
+  },
   "browserslist": [
     "last 1 version, not dead, ie >= 11"
-  ],
-  "dependencies": {
-    "@quasar/quasar-ui-qmarkdown": "^1.0.10",
-    "@quasar/quasar-ui-qribbon": "^1.0.0-beta.14",
-    "raw-loader": "^4.0.0"
-  }
+  ]
 }
