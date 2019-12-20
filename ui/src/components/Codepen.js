@@ -1,43 +1,32 @@
-<template lang="pug">
-form(
-  v-if="active"
-  method="POST"
-  action="https://codepen.io/pen/define/"
-  target="_blank"
-  rel="noopener"
-  class="hidden"
-)
-  input(
-    type="hidden"
-    name="data"
-    :value="options"
-  )
-</template>
-
-<script>
-import Quasar from 'quasar'
-
-const cssResources = [
-  'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-  `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.min.css`
-].join(';')
-
-const jsResources = [
-  'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
-  `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.umd.min.js`
-].join(';')
+import { Quasar } from 'quasar'
 
 export default {
   name: 'Codepen',
 
   props: {
     title: String,
-    slugifiedTitle: String
+    slugifiedTitle: String,
+    jsPaths: Array,
+    cssPath: Array
   },
 
   data: () => ({ active: false, parts: {} }),
 
   computed: {
+    cssResources () {
+      return [
+        'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
+        `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.min.css`
+      ].concat(this.cssPaths).join(';')
+    },
+
+    jsResources () {
+      return [
+        'https://cdn.jsdelivr.net/npm/vue/dist/vue.js',
+        `https://cdn.jsdelivr.net/npm/quasar@${Quasar.version}/dist/quasar.umd.min.js`
+      ].concat(this.jsPaths).join(';')
+    },
+
     css () {
       return (this.parts.style || '')
         .replace(/(<style.*?>|<\/style>)/g, '')
@@ -138,6 +127,25 @@ export default {
         this.$el.submit()
       })
     }
+  },
+
+  render (h) {
+    return h('form', {
+      staticClass: 'hidden',
+      attrs: {
+        method: 'POST',
+        action: 'https://codepen.io/pen/define/',
+        target: '_blank',
+        rel: 'noopener'
+      }
+    }, [
+      h('input', {
+        attrs: {
+          type: 'hidden',
+          name: 'data',
+          value: this.options
+        }
+      })
+    ])
   }
 }
-</script>
