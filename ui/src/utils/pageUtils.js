@@ -1,4 +1,8 @@
 export function copyHeading (id) {
+  if (!(window && window.location)) {
+    return ''
+  }
+
   const text = window.location.origin + window.location.pathname + '#' + id
 
   var textArea = document.createElement('textarea')
@@ -26,5 +30,9 @@ export function slugify (str) {
 }
 
 export function makeUrl (slug) {
+  if (!(window && window.location)) {
+    return ''
+  }
+
   window.location = window.location.origin + window.location.pathname + '#' + slug
 }

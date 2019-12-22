@@ -121,6 +121,10 @@ export default {
         return
       }
 
+      if (!(window && window.location)) {
+        return
+      }
+
       const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
 
       const textArea = document.createElement('textarea')
