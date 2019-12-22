@@ -1,6 +1,6 @@
 {
   "name": "quasar-ui-example-viewer",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "Display Vue code examples with template, script and style parts",
   "license": "MIT",
