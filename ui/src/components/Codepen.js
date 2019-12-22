@@ -93,6 +93,10 @@ export default {
     },
 
     options () {
+      if (!(window && window.location)) {
+        return ''
+      }
+
       const data = {
         title: this.computedTitle,
         html:
