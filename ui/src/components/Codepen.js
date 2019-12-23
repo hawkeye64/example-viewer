@@ -133,9 +133,7 @@ export default {
   },
 
   render (h) {
-    console.log('pre-render')
     if (window && window.location) {
-      console.log('rendering')
       return h('form', {
         staticClass: 'hidden',
         attrs: {
