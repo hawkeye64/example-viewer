@@ -93,10 +93,6 @@ export default {
     },
 
     options () {
-      if (!(window && window.location)) {
-        return ''
-      }
-
       const data = {
         title: this.computedTitle,
         html:
@@ -137,22 +133,26 @@ export default {
   },
 
   render (h) {
-    return h('form', {
-      staticClass: 'hidden',
-      attrs: {
-        method: 'POST',
-        action: 'https://codepen.io/pen/define/',
-        target: '_blank',
-        rel: 'noopener'
-      }
-    }, [
-      h('input', {
+    console.log('pre-render')
+    if (window && window.location) {
+      console.log('rendering')
+      return h('form', {
+        staticClass: 'hidden',
         attrs: {
-          type: 'hidden',
-          name: 'data',
-          value: this.options
+          method: 'POST',
+          action: 'https://codepen.io/pen/define/',
+          target: '_blank',
+          rel: 'noopener'
         }
-      })
-    ])
+      }, [
+        h('input', {
+          attrs: {
+            type: 'hidden',
+            name: 'data',
+            value: this.options
+          }
+        })
+      ])
+    }
   }
 }
