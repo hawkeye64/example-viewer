@@ -1,6 +1,6 @@
 {
   "name": "quasar-ui-example-viewer",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "Display Vue code examples with template, script and style parts",
   "license": "MIT",
@@ -35,6 +35,7 @@
     "@rollup/plugin-buble": "^0.20.0",
     "@rollup/plugin-json": "^4.0.0",
     "autoprefixer": "^9.7.3",
+    "babel-plugin-transform-modern-regexp": "^0.0.6",
     "chalk": "^3.0.0",
     "cssnano": "^4.1.10",
     "fs-extra": "^8.1.0",
@@ -45,6 +46,8 @@
     "quasar": "^1.5.10",
     "rimraf": "^3.0.0",
     "rollup": "^1.27.13",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-es": "^3.3.9",
     "zlib": "^1.0.5"
