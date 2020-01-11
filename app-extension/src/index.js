@@ -10,8 +10,9 @@ function extendConf (conf) {
   // register our boot file
   conf.boot.push('~quasar-app-extension-example-viewer/src/boot/register.js')
 
-  // make sure app extension files & ui package gets transpiled
+  // make sure app extension files & ui packages get transpiled
   conf.build.transpileDependencies.push(/quasar-app-extension-example-viewer[\\/]src/)
+  conf.build.transpileDependencies.push(/quasar-ui-example-viewer[\\/]src/)
 
   // make sure the stylesheet goes through webpack to avoid SSR issues
   conf.css.push('~quasar-ui-example-viewer/src/index.sass')
