@@ -10,9 +10,16 @@ export default {
 
   data () {
     return {
+      isMounted: false,
       active: false,
+      location: '',
       parts: {}
     }
+  },
+
+  beforeMount () {
+    this.isMounted = true
+    this.location = window.location.origin + window.location.pathname
   },
 
   computed: {
@@ -98,7 +105,7 @@ export default {
         html:
           `<!--
   Forked from:
-  ${window.location.origin + window.location.pathname}#${this.slugifiedTitle}
+  ${this.location}#${this.slugifiedTitle}
 -->
 <div id="q-app">
   ${this.html}
@@ -133,24 +140,22 @@ export default {
   },
 
   render (h) {
-    if (window && window.location) {
-      return h('form', {
-        staticClass: 'hidden',
+    return h('form', {
+      staticClass: 'hidden',
+      attrs: {
+        method: 'POST',
+        action: 'https://codepen.io/pen/define/',
+        target: '_blank',
+        rel: 'noopener'
+      }
+    }, [
+      h('input', {
         attrs: {
-          method: 'POST',
-          action: 'https://codepen.io/pen/define/',
-          target: '_blank',
-          rel: 'noopener'
+          type: 'hidden',
+          name: 'data',
+          value: this.isMounted ? this.options : ''
         }
-      }, [
-        h('input', {
-          attrs: {
-            type: 'hidden',
-            name: 'data',
-            value: this.options
-          }
-        })
-      ])
-    }
+      })
+    ])
   }
 }
