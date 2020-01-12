@@ -121,30 +121,28 @@ export default {
         return
       }
 
-      if (!(window && window.location)) {
-        return
+      if (window && window.location && document) {
+        const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
+
+        const textArea = document.createElement('textarea')
+        textArea.className = 'fixed-top'
+        textArea.value = text
+        document.body.appendChild(textArea)
+        textArea.focus()
+        textArea.select()
+
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+
+        this.$q.notify({
+          message: this.anchorResponse,
+          color: this.$q.dark.isActive ? 'grey-10' : 'white',
+          textColor: this.$q.dark.isActive ? 'amber' : 'primary',
+          icon: 'done',
+          position: 'top',
+          timeout: 2000
+        })
       }
-
-      const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
-
-      const textArea = document.createElement('textarea')
-      textArea.className = 'fixed-top'
-      textArea.value = text
-      document.body.appendChild(textArea)
-      textArea.focus()
-      textArea.select()
-
-      document.execCommand('copy')
-      document.body.removeChild(textArea)
-
-      this.$q.notify({
-        message: this.anchorResponse,
-        color: this.$q.dark.isActive ? 'grey-10' : 'white',
-        textColor: this.$q.dark.isActive ? 'amber' : 'primary',
-        icon: 'done',
-        position: 'top',
-        timeout: 2000
-      })
     },
 
     parseComponent (comp) {
