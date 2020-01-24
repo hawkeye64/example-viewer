@@ -75,6 +75,7 @@ export default {
         })
         .replace(/<(q-[\w-]+|div)([^>]+?)\/>/g, '<$1$2></$1>')
         .replace(/___TEMP_REPLACEMENT___/g, '>')
+        .replace(/^\s{2}/gm, '')
         .trim()
     },
 
