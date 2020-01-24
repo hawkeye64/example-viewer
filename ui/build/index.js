@@ -15,5 +15,6 @@ console.log(` 📦 Building ${green('v' + require('../package.json').version)}..
 
 createFolder('dist')
 
+// require('./script.javascript.js')
 runJob(join(__dirname, './script.javascript.js'))
 runJob(join(__dirname, './script.css.js'))
