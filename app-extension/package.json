@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-example-viewer",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "A Quasar App Extension",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "url": "https://github.com/sponsors/hawkeye64"
   },
   "dependencies": {
-    "quasar-ui-example-viewer": "^0.0.23"
+    "quasar-ui-example-viewer": "^0.0.24"
   },
   "engines": {
     "node": ">= 8.9.0",
