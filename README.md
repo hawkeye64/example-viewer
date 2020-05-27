@@ -14,6 +14,44 @@ When View Sources is clicked, you will get tabs for each section of a Vue SFC (s
 
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
+# Necessary
+In order for this to work, you need to make sure yu have a couple of things:
+
+1. Your app must be using `vueRouterMode: 'history'` (quasar.conf.js)
+2. In `/router/index.js` change:
+```js
+    scrollBehavior: () => ({ x: 0, y: 0 }),`
+```
+to this:
+```js
+    scrollBehavior: function(to, from, savedPosition) {
+      if (to.hash) {
+          return {selector: to.hash}
+      } else {
+          return { x: 0, y: 0 }
+      }
+    },
+```
+or better, to this:
+```js
+    scrollBehavior (to, _, savedPosition) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          if (to.hash !== void 0 && to.hash !== '') {
+            const el = document.getElementById(to.hash.substring(1))
+
+            if (el !== null) {
+              resolve({ x: 0, y: el.offsetTop - el.scrollHeight })
+              return
+            }
+          }
+
+          resolve(savedPosition || { x: 0, y: 0 })
+        }, 100)
+      })
+    },
+```
+
 # Structure
 * [/ui](ui) - standalone npm package (read this one for more info)
 * [/app-extension](app-extension) - Quasar app extension
