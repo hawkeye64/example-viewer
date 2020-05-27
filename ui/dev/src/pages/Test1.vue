@@ -1,15 +1,58 @@
 <template>
   <q-page padding class="row justify-center">
-    <example-viewer
-      title="Code Test"
-      file="DayViewBasic"
-      :location-url="locationUrl"
-      :js-paths="jsPaths"
-      :css-paths="cssPaths"
-      style="max-width: 800px; width: 100%;"
-    >
-    <p>Testing the slot</p>
-    </example-viewer>
+
+    <div class="row justify-center full-width">
+      <example-viewer
+        title="Day View Basic"
+        file="DayViewBasic"
+        :location-url="locationUrl"
+        :js-paths="jsPaths"
+        :css-paths="cssPaths"
+        style="max-width: 800px; width: 100%;"
+      >
+      <p>Testing the slot</p>
+      </example-viewer>
+    </div>
+
+    <div class="row justify-center full-width">
+      <example-viewer
+        title="Mini-Mode Basic"
+        file="MiniModeBasic"
+        :location-url="locationUrl"
+        :js-paths="jsPaths"
+        :css-paths="cssPaths"
+        style="max-width: 800px; width: 100%;"
+      >
+      <p>Testing the slot</p>
+      </example-viewer>
+    </div>
+
+    <div class="row justify-center full-width">
+      <example-viewer
+        title="Month View Basic"
+        file="MonthViewBasic"
+        :location-url="locationUrl"
+        :js-paths="jsPaths"
+        :css-paths="cssPaths"
+        style="max-width: 800px; width: 100%;"
+      >
+      <p>Testing the slot</p>
+      </example-viewer>
+    </div>
+
+    <div class="row justify-center full-width">
+      <example-viewer
+        title="Scheduler View Basic"
+        file="SchedulerViewBasic"
+        :location-url="locationUrl"
+        :js-paths="jsPaths"
+        :css-paths="cssPaths"
+        style="max-width: 800px; width: 100%;"
+      >
+      <p>Testing the slot</p>
+      </example-viewer>
+    </div>
+
   </q-page>
 </template>
 
