@@ -123,25 +123,28 @@ export default {
 
       if (window && window.location && document) {
         const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
+        const el = document.getElementById(this.slugifiedTitle)
 
-        const textArea = document.createElement('textarea')
-        textArea.className = 'fixed-top'
-        textArea.value = text
-        document.body.appendChild(textArea)
-        textArea.focus()
-        textArea.select()
+        if (el) {
+          el.id = ''
 
-        document.execCommand('copy')
-        document.body.removeChild(textArea)
+          window.location.hash = '#' + this.slugifiedTitle
 
-        this.$q.notify({
-          message: this.anchorResponse,
-          color: this.$q.dark.isActive ? 'grey-10' : 'white',
-          textColor: this.$q.dark.isActive ? 'amber' : 'primary',
-          icon: 'done',
-          position: 'top',
-          timeout: 2000
-        })
+          setTimeout(() => {
+            el.id = this.slugifiedTitle
+          }, 300)
+
+          copyToClipboard(text)
+
+          this.$q.notify({
+            message: this.anchorResponse,
+            color: this.$q.dark.isActive ? 'grey-10' : 'white',
+            textColor: this.$q.dark.isActive ? 'amber' : 'primary',
+            icon: 'done',
+            position: 'top',
+            timeout: 2000
+          })
+        }
       }
     },
 
@@ -176,7 +179,7 @@ export default {
       this.$refs.codepen.open(this.parts)
     },
 
-    __copy (tab) {
+    __copyTab (tab) {
       copyToClipboard(this.parts[this.tabs[tab]])
 
       this.$q.notify({
@@ -300,7 +303,7 @@ export default {
             icon: this.copyIcon
           },
           on: {
-            click: v => { this.__copy(tab) }
+            click: v => { this.__copyTab(tab) }
           }
         }, [
           h(QTooltip, this.copyLabel)
