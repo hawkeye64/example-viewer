@@ -15,7 +15,7 @@ When View Sources is clicked, you will get tabs for each section of a Vue SFC (s
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
 # Necessary
-In order for this to work, you need to make sure yu have a couple of things:
+In order for this to work, you need to make sure you have a couple of things in place:
 
 1. Your app must be using `vueRouterMode: 'history'` (quasar.conf.js)
 2. In `/router/index.js` change:
