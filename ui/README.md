@@ -3,9 +3,16 @@
 [![npm](https://img.shields.io/npm/v/quasar-ui-example-viewer.svg?label=quasar-ui-example-viewer)](https://www.npmjs.com/package/quasar-ui-example-viewer)
 [![npm](https://img.shields.io/npm/dt/quasar-ui-example-viewer.svg)](https://www.npmjs.com/package/quasar-ui-example-viewer)
 
-# Component ExampleViewer
-> Short description of the component
+# Example Viewer
+The Example Viewer component will show output of a Vue SFC (single file component). On the component's top toolbar, it has links to the Github repo, Codepen and View Sources.
 
+![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view.png)
+
+When View Sources is clicked, you will get tabs for each section of a Vue SFC (single file component) file. This also includes a "copy to clipboard" icon.
+
+![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--template.png)
+
+![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
 # Usage
 
@@ -87,43 +94,6 @@ If you need the RTL variant of the CSS, then go for the following (instead of th
 ```html
 <link href="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
 ```
-
-# Setup
-```bash
-$ yarn
-```
-
-# Developing
-```bash
-# start dev in SPA mode
-$ yarn dev
-
-# start dev in UMD mode
-$ yarn dev:umd
-
-# start dev in SSR mode
-$ yarn dev:ssr
-
-# start dev in Cordova iOS mode
-$ yarn dev:ios
-
-# start dev in Cordova Android mode
-$ yarn dev:android
-
-# start dev in Electron mode
-$ yarn dev:electron
-```
-
-# Building package
-```bash
-$ yarn build
-```
-
-# Adding Testing Components
-in the `ui/dev/src/pages` you can add Vue files to test your component/directive. When using `yarn dev` to build the UI, any pages in that location will automatically be picked up by dynamic routing and added to the test page.
-
-# Adding Assets
-If you have a component that has assets, like language or icon-sets, you will need to provide these for UMD. In the `ui/build/script.javascript.js` file, you will find a couple of commented out commands that call `addAssets`. Uncomment what you need and add your assets to have them be built and put into the `ui/dist` folder.
 
 # Donate
 If you appreciate the work that went into this, please consider [donating to Quasar](https://donate.quasar.dev).

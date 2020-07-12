@@ -4,7 +4,7 @@
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/hawkeye64/example-viewer.svg)]()
 
 # Example Viewer
-The Example Viewer component will show output of a Vue SFC (single file component). On the top toolbar, it has links to the Github repo, Codepen and View Sources.
+The Example Viewer component will show output of a Vue SFC (single file component). On the component's top toolbar, it has links to the Github repo, Codepen and View Sources.
 
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view.png)
 
@@ -15,7 +15,7 @@ When View Sources is clicked, you will get tabs for each section of a Vue SFC (s
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
 # Necessary
-In order for this to work, you need to make sure you have a couple of things in place:
+In order for this to work with a TOC, you need to make sure you have a couple of things in place:
 
 1. Your app must be using `vueRouterMode: 'history'` (quasar.conf.js)
 2. In `/router/index.js` change:
