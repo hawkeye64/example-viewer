@@ -12,7 +12,8 @@ const buildConf = require('./config')
 const buildUtils = require('./utils')
 
 const bubleConfig = {
-  objectAssign: 'Object.assign'
+  objectAssign: 'Object.assign',
+  transforms: { forOf: false }
 }
 
 const nodeResolveConfig = {
@@ -56,7 +57,8 @@ const builds = [
       },
       output: {
         file: resolve('../dist/index.common.js'),
-        format: 'cjs'
+        format: 'cjs',
+        exports: 'auto'
       }
     },
     build: {
