@@ -16,6 +16,13 @@ import {
   openURL
 } from 'quasar'
 
+import {
+  fabCodepen,
+  fabGithub,
+  farCopy,
+  fasCode
+} from '@quasar/extras/fontawesome-v5'
+
 import { QRibbon } from '@quasar/quasar-ui-qribbon'
 import { QMarkdown } from '@quasar/quasar-ui-qmarkdown'
 import { slugify } from '../utils/pageUtils'
@@ -53,7 +60,6 @@ export default {
     locationUrl: String,
     locationIcon: {
       type: String,
-      default: 'fab fa-github'
     },
     noEdit: Boolean,
     jsPaths: Array,
@@ -61,7 +67,6 @@ export default {
     noCopy: Boolean,
     copyIcon: {
       type: String,
-      default: 'content_copy'
     },
     copyLabel: {
       type: String,
@@ -87,6 +92,13 @@ export default {
       parts: {},
       expanded: false
     }
+  },
+
+  created () {
+    this.fabCodepen = fabCodepen
+    this.fabGithub = fabGithub
+    this.farCopy = farCopy
+    this.fasCode = fasCode
   },
 
   mounted () {
@@ -228,7 +240,7 @@ export default {
               dense: true,
               flat: true,
               round: true,
-              icon: this.locationIcon
+              icon: (this.locationIcon ? this.locationIcon : this.fabGithub)
             },
             on: {
               click: this.openLocation
@@ -239,7 +251,7 @@ export default {
               dense: true,
               flat: true,
               round: true,
-              icon: 'fab fa-codepen'
+              icon: this.fabCodepen
             },
             on: {
               click: this.openCodepen
@@ -250,7 +262,7 @@ export default {
               dense: true,
               flat: true,
               round: true,
-              icon: 'code'
+              icon: this.fasCode
             },
             on: {
               click: v => { this.expanded = !this.expanded }
@@ -300,7 +312,7 @@ export default {
             dense: true,
             flat: true,
             round: true,
-            icon: this.copyIcon
+            icon: (this.copyIcon ? this.copyIcon : this.farCopy)
           },
           on: {
             click: v => { this.__copyTab(tab) }
