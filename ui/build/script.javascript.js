@@ -143,12 +143,12 @@ function build (builds) {
 function genConfig (opts) {
   Object.assign(opts.rollup.input, {
     plugins: rollupPlugins,
-    external: [ 'vue', 'quasar' ]
+    external: [ 'vue', 'quasar', '@quasar/extras/fontawesome-v5' ]
   })
 
   Object.assign(opts.rollup.output, {
     banner: buildConf.banner,
-    globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
+    globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/extras/fontawesome-v5': 'fontawesomeV5', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
   })
 
   return opts
