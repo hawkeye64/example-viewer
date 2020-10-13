@@ -51,8 +51,19 @@ or better, to this:
       })
     },
 ```
+# Dependencies
+
+ExampleViewer has dependencies on `@quasar/qmarkdown` and `@quasar/qribbon`. Please install them into your Quasar project with the following:
+
+```bash
+quasar ext add @quasar/qmarkdown
+quasar ext add @quasar/qribbon
+```
+
+If you use something other than the @quasar/cli, then install as appropriate for your system. You will need to install the UI compnent of these dependendies. They are `@quasar/quasar-ui-qmarkdown` and `@quasar/quasar-ui-qribbon`.
 
 # Structure
+
 * [/ui](ui) - standalone npm package (read this one for more info)
 * [/app-extension](app-extension) - Quasar app extension
 

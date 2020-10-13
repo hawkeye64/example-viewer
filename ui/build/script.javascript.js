@@ -30,7 +30,7 @@ const cjsConfig = {
 const rollupPlugins = [
   nodeResolve(nodeResolveConfig),
   json(),
-  cjs(cjsConfig),
+  // cjs(cjsConfig),
   buble(bubleConfig)
 ]
 
@@ -143,12 +143,13 @@ function build (builds) {
 function genConfig (opts) {
   Object.assign(opts.rollup.input, {
     plugins: rollupPlugins,
-    external: [ 'vue', 'quasar', '@quasar/extras/fontawesome-v5' ]
+    external: [ 'vue', 'quasar', '@quasar/quasar-ui-qmarkdown', '@quasar/quasar-ui-qribbon' ]
+    // external: [ 'vue', 'quasar' ]
   })
 
   Object.assign(opts.rollup.output, {
     banner: buildConf.banner,
-    globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/extras/fontawesome-v5': 'fontawesomeV5', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
+    globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
   })
 
   return opts

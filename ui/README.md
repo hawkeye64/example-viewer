@@ -14,6 +14,17 @@ When View Sources is clicked, you will get tabs for each section of a Vue SFC (s
 
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
+# Dependencies
+
+ExampleViewer has dependencies on `@quasar/qmarkdown` and `@quasar/qribbon`. Please install them into your Quasar project with the following:
+
+```bash
+quasar ext add @quasar/qmarkdown
+quasar ext add @quasar/qribbon
+```
+
+If you use something other than the @quasar/cli, then install as appropriate for your system. You will need to install the UI compnent of these dependendies. They are `@quasar/quasar-ui-qmarkdown` and `@quasar/quasar-ui-qribbon`.
+
 # Usage
 
 ## Quasar CLI project
