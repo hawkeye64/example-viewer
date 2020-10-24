@@ -13,13 +13,13 @@
     "dev:electron": "quasar dev -m electron"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.8",
-    "quasar": "^1.14.1"
+    "@quasar/extras": "^1.9.10",
+    "quasar": "^1.14.2"
   },
   "devDependencies": {
-    "@quasar/app": "^2.1.1",
-    "@quasar/quasar-app-extension-qcalendar": "^2.3.2",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.33",
+    "@quasar/app": "^2.1.5",
+    "@quasar/quasar-app-extension-qcalendar": "^2.5.0",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.34",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.15"
   },
   "engines": {
