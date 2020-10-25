@@ -3,6 +3,7 @@
 
     <div class="row justify-center full-width">
       <example-viewer
+        codepen-title="QCalendar"
         title="Day View Basic"
         file="DayViewBasic"
         :location-url="locationUrl"

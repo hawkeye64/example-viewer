@@ -3,6 +3,10 @@ export default {
 
   props: {
     title: String,
+    codepenTitle: {
+      type: String,
+      default: 'Quasar Playground'
+    },
     slugifiedTitle: String,
     jsPaths: Array,
     cssPaths: Array
@@ -87,7 +91,7 @@ export default {
     computedTitle () {
       return (this.page ? this.page + ': ' : '') +
         (this.title ? this.title + ' - ' : '') +
-        'Quasar Playground'
+        (this.codepenTitle ? this.codepenTitle : 'Quasar Playground')
     },
 
     page () {

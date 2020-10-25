@@ -80,7 +80,8 @@ export default {
     anchorResponse: {
       type: String,
       default: 'Anchor copied to clipboard'
-    }
+    },
+    codepenTitle: String
   },
 
   data () {
@@ -424,6 +425,7 @@ export default {
       return h(Codepen, {
         ref: 'codepen',
         props: {
+          codepenTitle: this.codepenTitle,
           title: this.title,
           slugifiedTitle: this.slugifiedTitle,
           jsPaths: this.jsPaths,
