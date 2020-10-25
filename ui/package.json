@@ -33,7 +33,7 @@
     "url": "https://github.com/sponsors/hawkeye64"
   },
   "dependencies": {
-    "raw-loader": "^4.0.1"
+    "raw-loader": "^4.0.2"
   },
   "devDependencies": {
     "@quasar/quasar-ui-qmarkdown": "^1.0.35",

@@ -19,7 +19,7 @@
   "devDependencies": {
     "@quasar/app": "^2.1.5",
     "@quasar/quasar-app-extension-qcalendar": "^2.5.0",
-    "@quasar/quasar-app-extension-qmarkdown": "^1.0.34",
+    "@quasar/quasar-app-extension-qmarkdown": "^1.0.35",
     "@quasar/quasar-app-extension-qribbon": "^1.0.0-beta.15"
   },
   "engines": {
