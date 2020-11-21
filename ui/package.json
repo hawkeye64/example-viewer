@@ -1,6 +1,6 @@
 {
   "name": "quasar-ui-example-viewer",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "description": "Display Vue code examples with template, script and style parts with optional source and codepen links",
   "license": "MIT",
@@ -67,9 +67,7 @@
     "uglify-es": "^3.3.9",
     "zlib": "^1.0.5"
   },
-  "peerDependencies": {
-
-  },
+  "peerDependencies": {},
   "browserslist": [
     "last 1 version, not dead, ie >= 11"
   ]
