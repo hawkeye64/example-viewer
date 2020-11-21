@@ -17,6 +17,20 @@
 
     <div class="row justify-center full-width">
       <example-viewer
+        codepen-title="QCalendar"
+        title="Month View Custom"
+        file="MonthViewCustomCurrentDay"
+        :location-url="locationUrl"
+        :js-paths="jsPaths"
+        :css-paths="cssPaths"
+        style="max-width: 800px; width: 100%;"
+      >
+      <p>Testing the slot</p>
+      </example-viewer>
+    </div>
+
+    <div class="row justify-center full-width">
+      <example-viewer
         title="Mini-Mode Basic"
         file="MiniModeBasic"
         :location-url="locationUrl"
