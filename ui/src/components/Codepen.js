@@ -44,6 +44,9 @@ export default {
     css () {
       return (this.parts.style || '')
         .replace(/(<style.*?>|<\/style>)/g, '')
+        .replace(/::v-deep /g, '')
+        .replace(/>>> /g, '')
+        .replace(/\/deep\/ /g, '')
         .trim()
     },
 
