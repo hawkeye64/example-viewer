@@ -40,6 +40,9 @@ export default {
       required: true,
       validator: v => v.length > 0
     },
+    codepenTitle: String,
+    jsPaths: Array,
+    cssPaths: Array,
     tooltipLabel: {
       type: String,
       default: 'View sources'
@@ -61,8 +64,6 @@ export default {
       type: String,
     },
     noEdit: Boolean,
-    jsPaths: Array,
-    cssPaths: Array,
     noCopy: Boolean,
     copyIcon: {
       type: String,
@@ -80,8 +81,7 @@ export default {
     anchorResponse: {
       type: String,
       default: 'Anchor copied to clipboard'
-    },
-    codepenTitle: String
+    }
   },
 
   data () {
@@ -114,36 +114,36 @@ export default {
         /* webpackMode: "lazy-once" */
         `!raw-loader!examples/${this.file}.vue`
       ).then(comp => {
-        this.parseComponent(comp.default)
+        this.__parseComponent(comp.default)
       })
     })
   },
 
   computed: {
-    slugifiedTitle () {
-      return this.slugify('example-' + this.title)
+    __slugifiedTitle () {
+      return this.__slugify('example-' + this.title)
     }
   },
 
   methods: {
-    slugify,
+    __slugify: slugify,
 
-    copyHeading () {
+    __copyHeading () {
       if (this.noAnchor === true) {
         return
       }
 
       if (window && window.location && document) {
-        const text = window.location.origin + window.location.pathname + '#' + this.slugifiedTitle
-        const el = document.getElementById(this.slugifiedTitle)
+        const text = window.location.origin + window.location.pathname + '#' + this.__slugifiedTitle
+        const el = document.getElementById(this.__slugifiedTitle)
 
         if (el) {
           el.id = ''
 
-          window.location.hash = '#' + this.slugifiedTitle
+          window.location.hash = '#' + this.__slugifiedTitle
 
           setTimeout(() => {
-            el.id = this.slugifiedTitle
+            el.id = this.__slugifiedTitle
           }, 300)
 
           copyToClipboard(text)
@@ -160,11 +160,11 @@ export default {
       }
     },
 
-    parseComponent (comp) {
+    __parseComponent (comp) {
       const
-        template = this.parseTemplate('template', comp),
-        script = this.parseTemplate('script', comp),
-        style = this.parseTemplate('style', comp)
+        template = this.__parseTemplate('template', comp),
+        script = this.__parseTemplate('script', comp),
+        style = this.__parseTemplate('style', comp)
 
       this.parts = {
         template,
@@ -174,7 +174,7 @@ export default {
       this.tabs = ['template', 'script', 'style'].filter(type => this.parts[type])
     },
 
-    parseTemplate (target, template) {
+    __parseTemplate (target, template) {
       const
         string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`,
         regex = new RegExp(string, 'g'),
@@ -183,11 +183,11 @@ export default {
       return parsed[1] || ''
     },
 
-    openLocation () {
+    __openLocation () {
       openURL(`${this.locationUrl}/${this.file}.vue`)
     },
 
-    openCodepen () {
+    __openCodepen () {
       this.$refs.codepen.open(this.parts)
     },
 
@@ -218,7 +218,7 @@ export default {
         h(QToolbarTitle, {
           staticClass: this.noAnchor !== true ? 'example-title' : '',
           on: {
-            click: this.copyHeading
+            click: this.__copyHeading
           }
         }, [
           h('span', {
@@ -243,7 +243,7 @@ export default {
               icon: (this.locationIcon ? this.locationIcon : this.github)
             },
             on: {
-              click: this.openLocation
+              click: this.__openLocation
             }
           }),
           this.noEdit !== true && h(QBtn, {
@@ -254,7 +254,7 @@ export default {
               icon: this.codepen
             },
             on: {
-              click: this.openCodepen
+              click: this.__openCodepen
             }
           }),
           h(QBtn, {
@@ -427,7 +427,7 @@ export default {
         props: {
           codepenTitle: this.codepenTitle,
           title: this.title,
-          slugifiedTitle: this.slugifiedTitle,
+          slugifiedTitle: this.__slugifiedTitle,
           jsPaths: this.jsPaths,
           cssPaths: this.cssPaths
         }
@@ -439,7 +439,7 @@ export default {
     return h('section', {
       staticClass: 'q-pa-md overflow-auto',
       attrs: {
-        id: this.slugifiedTitle
+        id: this.__slugifiedTitle
       }
     }, [
       this.__renderCard(h),

@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "docsUrl": "https://github.com/hawkeye64/example-viewer"
+  },
+  "props": {
+    "title": {
+      "type": "String",
+      "desc": "The title for the example",
+      "category": "content",
+      "required": true,
+      "examples": [
+        "title=\"Basic\""
+      ]
+    },
+    "file": {
+      "type": "String",
+      "desc": "All examples should be put in an \"examples\" folder. This property is the name of the file to be displayed in that folder.",
+      "category": "model",
+      "required": true,
+      "examples": [
+        "file=\"MonthViewBasic\""
+      ]
+    },
+    "tooltip-label": {
+      "type": "String",
+      "desc": "The tooltip to be used for the label",
+      "category": "content",
+      "default": "View sources",
+      "examples": [
+        "tooltip-label=\"View sources to this example\""
+      ]
+    },
+    "ribbon-color": {
+      "type": "String",
+      "desc": "The ribbon color",
+      "category": "style",
+      "default": "#c0c0c0",
+      "examples": [
+        "ribbon-color=\"#ffee00\""
+      ]
+    },
+    "ribbon-text-color": {
+      "type": "String",
+      "desc": "The ribbon text color",
+      "category": "style",
+      "default": "rgb(0,0,0,.58)",
+      "examples": [
+        "ribbon-text-color=\"#ffee00\""
+      ]
+    },
+    "ribbon-leaf-color": {
+      "type": "String",
+      "desc": "The ribbon leaf color",
+      "category": "style",
+      "default": "#a0a0a0",
+      "examples": [
+        "ribbon-leaf-color=\"#ffee00\""
+      ]
+    },
+    "location-url": {
+      "type": "String",
+      "desc": "The url location for the example (without file name)",
+      "category": "model",
+      "examples": [
+        "location-url=\"https://github.com/quasarframework/quasar-ui-qcalendar/tree/dev/demo/src/examples\""
+      ]
+    },
+    "location-icon": {
+      "type": "String",
+      "desc": "The icon to use for location",
+      "category": "style",
+      "examples": [
+        "location-icon=\"location\"",
+        "location-icon=\"fas fa-location\"",
+        ":location-icon=\"myLocationSvg\""
+      ]
+    },
+    "no-edit": {
+      "type": "Boolean",
+      "desc": "Does not show the codepen icon (use this for examples don't work on codepen)",
+      "category": ["style", "behavior"]
+    },
+    "js-paths": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "desc": "One or more paths to UMD files to be loaded into the codepen",
+      "category": "model",
+      "examples": [
+        "js-paths=[\"https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.umd.min.js\"]"
+      ]
+    },
+    "css-paths": {
+      "type": "Array",
+      "tsType": "StringArray",
+      "desc": "One or more CSS files to be loaded into the codepen",
+      "category": "model",
+      "examples": [
+        "css-paths=[\"https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@latest/dist/index.min.css\", \"https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css\"]"
+      ]
+    },
+    "no-copy": {
+      "type": "Boolean",
+      "desc": "Don't show copy-to-clipboard icon",
+      "category": ["style", "behavior"]
+    },
+    "copy-icon": {
+      "type": "String",
+      "desc": "Icon to use for the copy-to-clipboard icon",
+      "category": "style",
+      "examples": [
+        "copy-icon=\"copy\"",
+        "copy-icon=\"fas fa-copy\"",
+        ":copy-icon=\"myCopySvg\""
+      ]
+    },
+    "copy-label": {
+      "type": "String",
+      "desc": "Tooltip text to be used for copy icon",
+      "default": "Copy to clipboard",
+      "category": "content",
+      "__exemption": [ "examples" ]
+    },
+    "copy-response": {
+      "type": "String",
+      "desc": "The text to be display after copy to clipboard",
+      "default": "Copied to clipboard",
+      "category": "content",
+      "__exemption": [ "examples" ]
+    },
+    "no-line-numbers": {
+      "type": "Boolean",
+      "desc": "Don't show line numbers in source views",
+      "category": ["style", "behavior"]
+    },
+    "no-anchor": {
+      "type": "Boolean",
+      "desc": "Don't use anchor links on title",
+      "category": ["style", "behavior"]
+    },
+    "anchor-response": {
+      "type": "String",
+      "desc": "Anchor copied to clipboard",
+      "category": "content",
+      "__exemption": [ "examples" ]
+    },
+    "codepen-title": {
+      "type": "String",
+      "desc": "This is combined with property `title` when codepen is opened",
+      "category": ["content", "behavior"],
+      "examples": [
+        "codepen-title=\"QCalendar\""
+      ]
+    }
+  }
+}
+  
