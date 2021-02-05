@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-example-viewer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Quasar App Extension",
   "author": "Jeff Galbraith <jeff@quasar.dev>",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "github"
   ],
   "dependencies": {
-    "quasar-ui-example-viewer": "^1.1.0"
+    "quasar-ui-example-viewer": "^1.1.1"
   },
   "devDependencies": {
     "@vue/eslint-config-standard": "^5.1.2",
