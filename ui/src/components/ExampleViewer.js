@@ -278,7 +278,7 @@ export default defineComponent({
             class: 'col-auto'
           }, {
             default: () => [
-              props.locationUrl && h(QBtn, {
+              (props.locationUrl || defaults.locationUrl.value) && h(QBtn, {
                 dense: true,
                 flat: true,
                 round: true,
