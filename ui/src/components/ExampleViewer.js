@@ -33,6 +33,18 @@ import { slugify } from '../utils/pageUtils'
 import Codepen from './Codepen.js'
 import CodePrism from './CodePrism.js'
 
+const defaults = {
+  locationUrl: ref(null),
+  jsPaths: ref([]),
+  cssPaths: ref([])
+}
+
+export const setDefaults = ({ locationUrl, jsPaths, cssPaths }) => {
+  if (locationUrl) defaults.locationUrl.value = locationUrl
+  if (jsPaths) defaults.jsPaths.value.splice(0, defaults.jsPaths.value.length, jsPaths)
+  if (cssPaths) defaults.cssPaths.value.splice(0, defaults.cssPaths.value.length, cssPaths)
+}
+
 export default defineComponent({
   name: 'ExampleViewer',
 
@@ -206,7 +218,7 @@ export default defineComponent({
     }
 
     function __openLocation () {
-      openURL(`${ props.locationUrl }/${ props.file }.vue`)
+      openURL(`${ props.locationUrl || defaults.locationUrl.value }/${ props.file }.vue`)
     }
 
     function __openCodepen () {
@@ -431,8 +443,8 @@ export default defineComponent({
         codepenTitle: props.codepenTitle,
         title: props.title,
         slugifiedTitle: parsedSlugifiedTitle.value,
-        jsPaths: props.jsPaths,
-        cssPaths: props.cssPaths
+        jsPaths: props.jsPaths || defaults.jsPaths.value,
+        cssPaths: props.cssPaths || defaults.cssPaths.value
       })
     }
 

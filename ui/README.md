@@ -108,6 +108,27 @@ Here is an example for `quasar.conf.js`:
   }
 ```
 
+# Defaults
+Instead of passing `locationUrl`, `jsPaths` and `cssPaths` each time the component is used, you can now set defaults:
+
+```js
+import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src/index.js'
+
+setDefaults({
+  locationUrl: 'https://github.com/quasarframework/quasar-ui-qcalendar/tree/next/ui/dev/src/examples',
+  jsPaths: [`https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.umd.min.js`],
+  cssPaths: [
+    `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,
+    'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
+  ]
+})
+
+export default boot(({ app }) => {
+  app.use(ExampleViewer)
+})
+
+```
+
 # Donate
 If you appreciate the work that went into this, please consider donating to [Jeff](https://github.com/sponsors/hawkeye64).
 
