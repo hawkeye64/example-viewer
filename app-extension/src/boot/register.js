@@ -1,4 +1,7 @@
-import Vue from 'vue'
+import { boot } from 'quasar/wrappers'
 import VuePlugin from 'quasar-ui-example-viewer'
 
-Vue.use(VuePlugin)
+export default boot(({ app }) => {
+  // for use inside Vue files (Options API) through this.$axios and this.$api
+  app.use(VuePlugin)
+})

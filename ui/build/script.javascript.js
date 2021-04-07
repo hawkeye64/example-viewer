@@ -15,84 +15,137 @@ const bubleConfig = {
   transforms: { forOf: false }
 }
 
-const nodeResolveConfig = {
-  extensions: ['.js'],
-  preferBuiltins: false
+// const nodeResolveConfig = {
+//   extensions: ['.js'],
+//   preferBuiltins: false
+// }
+
+function pathResolve (_path) {
+  return path.resolve(__dirname, _path)
 }
 
-const rollupPlugins = [
-  nodeResolve(nodeResolveConfig),
-  json(),
-  buble(bubleConfig)
+// const rollupPlugins = [
+//   nodeResolve(nodeResolveConfig),
+//   json(),
+//   buble(bubleConfig)
+// ]
+
+const rollupPluginsModern = [
+  nodeResolve(),
+  json()
 ]
 
-const builds = [
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.esm.js')
-      },
-      output: {
-        file: pathResolve('../dist/index.esm.js'),
-        format: 'es'
-      }
-    },
-    build: {
-      // unminified: true,
-      minified: true
-    }
+const uglifyJsOptions = {
+  compress: {
+    // turn off flags with small gains to speed up minification
+    arrows: false,
+    collapse_vars: false,
+    comparisons: false,
+    computed_props: false,
+    hoist_funs: false,
+    hoist_props: false,
+    hoist_vars: false,
+    inline: false,
+    loops: false,
+    negate_iife: false,
+    properties: false,
+    reduce_funcs: false,
+    reduce_vars: false,
+    switches: false,
+    toplevel: false,
+    typeofs: false,
+
+    // a few flags with noticable gains/speed ratio
+    booleans: true,
+    if_return: true,
+    sequences: true,
+    unused: true,
+
+    // required features to drop conditional branches
+    conditionals: true,
+    dead_code: true,
+    evaluate: true
   },
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.common.js')
-      },
-      output: {
-        file: pathResolve('../dist/index.common.js'),
-        format: 'cjs',
-        exports: 'auto'
-      }
-    },
-    build: {
-      // unminified: true,
-      minified: true
-    }
-  },
-  {
-    rollup: {
-      input: {
-        input: pathResolve('entry/index.umd.js')
-      },
-      output: {
-        name: 'ExampleViewer',
-        file: pathResolve('../dist/index.umd.js'),
-        format: 'umd'
-      }
-    },
-    build: {
-      unminified: true,
-      minified: true,
-      minExt: true
-    }
+  mangle: {
+    safari10: true
   }
+}
+
+const buildEntries = [
+  'index'
 ]
+
+function generateBuilds() {
+  const builds = []
+
+  buildEntries.forEach(entry => {
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.esm.js`)
+        },
+        output: {
+          file: pathResolve(`../dist/${entry}.esm.js`),
+          format: 'es',
+          exports: 'auto'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.common.js`)
+        },
+        output: {
+          file: pathResolve(`../dist/${entry}.common.js`),
+          format: 'cjs',
+          exports: 'auto'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+    builds.push({
+      rollup: {
+        input: {
+          input: pathResolve(`entry/${entry}.umd.js`)
+        },
+        output: {
+          name: entry,
+          file: pathResolve(`../dist/${entry}.umd.js`),
+          format: 'umd'
+        }
+      },
+      build: {
+        unminified: true,
+        minified: true,
+        minExt: true
+      }
+    })
+  })
+
+  return builds
+}
+
+const builds = generateBuilds()
 
 // Add your asset folders here, if needed
 // addAssets(builds, 'icon-set', 'iconSet')
 // addAssets(builds, 'lang', 'lang')
 
 build(builds)
-//  .then(() => {
-//    require('./build.api')
-//  })
 
 /**
  * Helpers
  */
-
-function pathResolve (_path) {
-  return path.resolve(__dirname, _path)
-}
 
 // eslint-disable-next-line no-unused-vars
 function addAssets (builds, type, injectName) {
@@ -134,14 +187,15 @@ function build (builds) {
 
 function genConfig (opts) {
   Object.assign(opts.rollup.input, {
-    plugins: rollupPlugins,
-    external: ['vue', 'quasar', '@quasar/quasar-ui-qmarkdown', '@quasar/quasar-ui-qribbon']
-    // external: [ 'vue', 'quasar' ]
+    plugins: rollupPluginsModern,
+    // external: ['vue', 'quasar', '@quasar/quasar-ui-qmarkdown', '@quasar/quasar-ui-qribbon']
+    external: [ 'vue', 'quasar', 'prismjs' ]
   })
 
   Object.assign(opts.rollup.output, {
     banner: buildConf.banner,
-    globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
+    globals: { vue: 'Vue', quasar: 'Quasar', prismjs: 'Prism' }
+    // globals: { vue: 'Vue', quasar: 'Quasar', '@quasar/quasar-ui-qmarkdown': 'QMarkdown', '@quasar/quasar-ui-qribbon': 'QRibbon' }
   })
 
   return opts
@@ -150,6 +204,25 @@ function genConfig (opts) {
 function addExtension (filename, ext = 'min') {
   const insertionPoint = filename.lastIndexOf('.')
   return `${filename.slice(0, insertionPoint)}.${ext}${filename.slice(insertionPoint)}`
+}
+
+function injectVueRequirement (code) {
+  // eslint-disable-next-line quotes
+  const index = code.indexOf(`Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue`)
+
+  if (index === -1) {
+    return code
+  }
+
+  const checkMe = ` if (Vue === void 0) {
+    console.error('[ ExampleViewer ] Vue is required to run. Please add a script tag for it before loading ExampleViewer.')
+    return
+  }
+  `
+
+  return code.substring(0, index - 1) +
+    checkMe +
+    code.substring(index)
 }
 
 function buildEntry (config) {
@@ -170,11 +243,12 @@ function buildEntry (config) {
         return code
       }
 
-      const minified = uglify.minify(code, {
-        compress: {
-          pure_funcs: ['makeMap']
-        }
-      })
+      // const minified = uglify.minify(code, {
+      //   compress: {
+      //     pure_funcs: ['makeMap']
+      //   }
+      // })
+      const minified = uglify.minify(code, uglifyJsOptions)
 
       if (minified.error) {
         return Promise.reject(minified.error)
@@ -192,23 +266,4 @@ function buildEntry (config) {
       console.error(err)
       process.exit(1)
     })
-}
-
-function injectVueRequirement (code) {
-  // eslint-disable-next-line
-  const index = code.indexOf(`Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue`)
-
-  if (index === -1) {
-    return code
-  }
-
-  const checkMe = ` if (Vue === void 0) {
-    console.error('[ Quasar ] Vue is required to run. Please add a script tag for it before loading Quasar.')
-    return
-  }
-  `
-
-  return code.substring(0, index - 1) +
-    checkMe +
-    code.substring(index)
 }

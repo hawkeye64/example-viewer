@@ -2,7 +2,7 @@ export function copyHeading (id) {
   if (window && window.location && document) {
     const text = window.location.origin + window.location.pathname + '#' + id
 
-    var textArea = document.createElement('textarea')
+    const textArea = document.createElement('textarea')
     textArea.className = 'fixed-top'
     textArea.value = text
     document.body.appendChild(textArea)

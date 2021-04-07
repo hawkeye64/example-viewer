@@ -1,6 +1,6 @@
 <template>
   <div style="max-width: 800px; width: 100%;">
-    <q-calendar
+    <q-calendar-month
       v-model="selectedDate"
       view="month"
       locale="en-us"
@@ -10,34 +10,40 @@
 </template>
 
 <script>
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  name: 'MonthViewCustomCurrentDay',
+
+  setup () {
+    const selectedDate = ref('')
+
     return {
-      selectedDate: ''
+      selectedDate
     }
   }
-}
+})
 </script>
 
 <style lang="sass" scoped>
-.calendar ::v-deep .q-calendar-weekly__day .q-btn
+.calendar :deep .q-calendar-weekly__day .q-btn
   border-radius: 8px
 
-.calendar ::v-deep .q-current-day .q-btn
+.calendar :deep .q-current-day .q-btn
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)
 
-.calendar ::v-deep .q-current-day .q-btn .q-btn__wrapper
+.calendar :deep .q-current-day .q-btn .q-btn__wrapper
   color: #027BE3
 
-.calendar ::v-deep .q-current-day .q-btn .q-btn__wrapper:before
+.calendar :deep .q-current-day .q-btn .q-btn__wrapper:before
   background: #cce7ff
 
-.calendar ::v-deep .q-active-date .q-btn
+.calendar :deep .q-active-date .q-btn
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)
 
-.calendar ::v-deep .q-active-date .q-btn .q-btn__wrapper
+.calendar :deep .q-active-date .q-btn .q-btn__wrapper
   color: #027BE3
 
-.calendar ::v-deep .q-active-date .q-btn .q-btn__wrapper:before
+.calendar :deep .q-active-date .q-btn .q-btn__wrapper:before
   background: #cce7ff
 </style>

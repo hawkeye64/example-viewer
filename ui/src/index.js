@@ -3,7 +3,7 @@ import ExampleViewer from './components/ExampleViewer'
 
 export {
   version,
-  ExampleViewer,
+  ExampleViewer
 }
 
 export default {

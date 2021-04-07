@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-center q-pa-md" style="max-width: 800px; width: 100%; overflow: hidden;">
-    <q-calendar
+    <q-calendar-month
       ref="calendar"
       v-model="selectedDate"
       view="month"
@@ -12,11 +12,17 @@
 </template>
 
 <script>
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  name: 'MiniModeBasic',
+
+  setup () {
+    const selectedDate = ref('')
+
     return {
-      selectedDate: ''
+      selectedDate
     }
   }
-}
+})
 </script>

@@ -5,12 +5,13 @@
 
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
+
 /* eslint-env node */
-
-const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const { configure } = require('quasar/wrappers')
+const path = require('path')
 
-module.exports = function (/* ctx */) {
+module.exports = configure(function (/* ctx */) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -65,20 +66,20 @@ module.exports = function (/* ctx */) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
-      extendWebpack (cfg, { isServer, isClient }) {
-        cfg.plugins.push(new ESLintPlugin({
-          files: './src',
-          extensions: ['js', 'vue']
-        }))
-      },
-
-      // https://quasar.dev/quasar-cli/handling-webpack
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack (chain) {
         chain.resolve.alias.merge({
           ui: path.resolve(__dirname, '../src/index.js'),
           examples: path.resolve(__dirname, './src/examples')
         })
+
+        chain.plugin('eslint-webpack-plugin')
+          .use(ESLintPlugin, [{
+            extensions: [ 'js', 'vue' ],
+            exclude: 'node_modules'
+          }])
       }
+
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
@@ -90,11 +91,12 @@ module.exports = function (/* ctx */) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
       config: {
         dark: 'auto'
       },
+
+      // iconSet: 'material-icons', // Quasar icon set
+      // lang: 'en-US', // Quasar language pack
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -111,4 +113,4 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/options/animations
     animations: []
   }
-}
+})

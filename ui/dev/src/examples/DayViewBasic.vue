@@ -1,5 +1,5 @@
 <template>
-  <q-calendar
+  <q-calendar-day
     v-model="selectedDate"
     view="day"
     locale="en-us"
@@ -8,11 +8,17 @@
 </template>
 
 <script>
-export default {
-  data () {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  name: 'DayViewBasic',
+
+  setup () {
+    const selectedDate = ref('')
+
     return {
-      selectedDate: ''
+      selectedDate
     }
   }
-}
+})
 </script>

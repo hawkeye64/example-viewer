@@ -14,16 +14,6 @@ When View Sources is clicked, you will get tabs for each section of a Vue SFC (s
 
 ![example-viewer showing QCalendar (week view)](https://raw.githubusercontent.com/hawkeye64/example-viewer/master/images/example-viewer--QCalendar-week-view--script.png)
 
-# Dependencies
-
-ExampleViewer has dependencies on `@quasar/qmarkdown` and `@quasar/qribbon`. Please install them into your Quasar project with the following:
-
-```bash
-quasar ext add @quasar/qmarkdown
-quasar ext add @quasar/qribbon
-```
-
-If you use something other than the @quasar/cli, then install as appropriate for your system. You will need to install the UI compnent of these dependendies. They are `@quasar/quasar-ui-qmarkdown` and `@quasar/quasar-ui-qribbon`.
 
 # Usage
 
@@ -94,20 +84,32 @@ Add the following tag(s) after the Quasar ones:
 ```html
 <head>
   <!-- AFTER the Quasar stylesheet tags: -->
-  <link href="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer/dist/index.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer@next/dist/index.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <!-- at end of body, AFTER Quasar script(s): -->
-  <script src="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer/dist/index.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer@next/dist/index.umd.min.js"></script>
 </body>
 ```
 If you need the RTL variant of the CSS, then go for the following (instead of the above stylesheet link):
 ```html
-<link href="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.jsdelivr.net/npm/quasar-ui-example-viewer@next/dist/index.rtl.min.css" rel="stylesheet" type="text/css">
+```
+# Alias
+You will need a webpack alias called "examples". This is the folder needed by the Example Viewer to find the Vue files that will be used.
+
+Here is an example for `quasar.conf.js`:
+
+```js
+  chainWebpack (chain) {
+    chain.resolve.alias.merge({
+      examples: path.resolve(__dirname, './src/examples')
+    })
+  }
 ```
 
 # Donate
-If you appreciate the work that went into this, please consider [donating to Quasar](https://donate.quasar.dev).
+If you appreciate the work that went into this, please consider donating to [Jeff](https://github.com/sponsors/hawkeye64).
 
 # License
 MIT (c) Jeff Galbraith <jeff@quasar.dev>
