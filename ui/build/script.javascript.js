@@ -201,7 +201,7 @@ function genConfig (opts) {
 
 function addExtension (filename, ext = 'min') {
   const insertionPoint = filename.lastIndexOf('.')
-  return `${filename.slice(0, insertionPoint)}.${ext}${filename.slice(insertionPoint)}`
+  return `${ filename.slice(0, insertionPoint) }.${ ext }${ filename.slice(insertionPoint) }`
 }
 
 function injectVueRequirement (code) {
