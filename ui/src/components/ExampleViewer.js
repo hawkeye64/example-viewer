@@ -14,7 +14,6 @@ import {
   QCardSection,
   QSeparator,
   QSlideTransition,
-  QSpace,
   QTab,
   QTabs,
   QTabPanel,
@@ -239,7 +238,6 @@ export default defineComponent({
       return h(QToolbar, {}, {
         default: () => [
           __renderTitle(),
-          h(QSpace),
           h('div', {
             class: 'col-auto'
           }, {
@@ -417,7 +415,8 @@ export default defineComponent({
     function __renderExampleViewer () {
       return h('section', {
         class: 'q-pa-md overflow-auto',
-        id: parsedSlugifiedTitle.value
+        id: parsedSlugifiedTitle.value,
+        name: parsedSlugifiedTitle.value
       }, {
         default: () => [
           __renderCard(),
