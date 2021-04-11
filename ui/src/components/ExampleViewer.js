@@ -27,8 +27,6 @@ import {
   useQuasar
 } from 'quasar'
 
-// import { QRibbon } from '@quasar/quasar-ui-qribbon'
-// import { QMarkdown } from '@quasar/quasar-ui-qmarkdown'
 import { slugify } from '../utils/pageUtils'
 import Codepen from './Codepen.js'
 import CodePrism from './CodePrism.js'
@@ -64,18 +62,6 @@ export default defineComponent({
     tooltipLabel: {
       type: String,
       default: 'View sources'
-    },
-    ribbonColor: {
-      type: String,
-      default: '#c0c0c0'
-    },
-    ribbonTextColor: {
-      type: String,
-      default: 'rgb(0,0,0,.58)'
-    },
-    ribbonLeafColor: {
-      type: String,
-      default: '#a0a0a0'
     },
     locationUrl: String,
     locationIcon: String,
@@ -238,7 +224,7 @@ export default defineComponent({
       })
     }
 
-    function __renderRibbon () {
+    function __renderTitle () {
       return h(QToolbarTitle, {
         class: props.noAnchor !== true ? 'example-title' : '',
         onClick: __copyHeading
@@ -247,32 +233,12 @@ export default defineComponent({
           class: 'ellipsis'
         }, props.title)
       })
-
-      // return h(QRibbon, {
-      //   props: {
-      //     position: 'left',
-      //     color: props.ribbonTextColor,
-      //     backgroundColor: props.ribbonColor,
-      //     leafColor: props.ribbonLeafColor,
-      //     leafPosition: 'bottom',
-      //     decoration: 'rounded-out'
-      //   }
-      // }, [
-      //   h(QToolbarTitle, {
-      //     class: props.noAnchor !== true ? 'example-title' : '',
-      //     onClick: __copyHeading
-      //   }, [
-      //     h('span', {
-      //       class: 'ellipsis'
-      //     }, props.title)
-      //   ])
-      // ])
     }
 
     function __renderToolbar () {
       return h(QToolbar, {}, {
         default: () => [
-          __renderRibbon(),
+          __renderTitle(),
           h(QSpace),
           h('div', {
             class: 'col-auto'

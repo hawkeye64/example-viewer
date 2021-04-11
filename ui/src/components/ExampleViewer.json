@@ -30,33 +30,6 @@
         "tooltip-label=\"View sources to this example\""
       ]
     },
-    "ribbon-color": {
-      "type": "String",
-      "desc": "The ribbon color",
-      "category": "style",
-      "default": "#c0c0c0",
-      "examples": [
-        "ribbon-color=\"#ffee00\""
-      ]
-    },
-    "ribbon-text-color": {
-      "type": "String",
-      "desc": "The ribbon text color",
-      "category": "style",
-      "default": "rgb(0,0,0,.58)",
-      "examples": [
-        "ribbon-text-color=\"#ffee00\""
-      ]
-    },
-    "ribbon-leaf-color": {
-      "type": "String",
-      "desc": "The ribbon leaf color",
-      "category": "style",
-      "default": "#a0a0a0",
-      "examples": [
-        "ribbon-leaf-color=\"#ffee00\""
-      ]
-    },
     "location-url": {
       "type": "String",
       "desc": "The url location for the example (without file name)",
