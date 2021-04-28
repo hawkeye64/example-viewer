@@ -75,17 +75,17 @@ const buildEntries = [
   'index'
 ]
 
-function generateBuilds() {
+function generateBuilds () {
   const builds = []
 
   buildEntries.forEach(entry => {
     builds.push({
       rollup: {
         input: {
-          input: pathResolve(`entry/${entry}.esm.js`)
+          input: pathResolve(`entry/${ entry }.esm.js`)
         },
         output: {
-          file: pathResolve(`../dist/${entry}.esm.js`),
+          file: pathResolve(`../dist/${ entry }.esm.js`),
           format: 'es',
           exports: 'auto'
         }
@@ -99,10 +99,10 @@ function generateBuilds() {
     builds.push({
       rollup: {
         input: {
-          input: pathResolve(`entry/${entry}.common.js`)
+          input: pathResolve(`entry/${ entry }.common.js`)
         },
         output: {
-          file: pathResolve(`../dist/${entry}.common.js`),
+          file: pathResolve(`../dist/${ entry }.common.js`),
           format: 'cjs',
           exports: 'auto'
         }
@@ -116,11 +116,11 @@ function generateBuilds() {
     builds.push({
       rollup: {
         input: {
-          input: pathResolve(`entry/${entry}.umd.js`)
+          input: pathResolve(`entry/${ entry }.umd.js`)
         },
         output: {
           name: entry,
-          file: pathResolve(`../dist/${entry}.umd.js`),
+          file: pathResolve(`../dist/${ entry }.umd.js`),
           format: 'umd'
         }
       },
@@ -152,24 +152,24 @@ function addAssets (builds, type, injectName) {
   const
     files = fs.readdirSync(pathResolve('../../ui/src/components/' + type)),
     plugins = [buble(bubleConfig)],
-    outputDir = pathResolve(`../dist/${type}`)
+    outputDir = pathResolve(`../dist/${ type }`)
 
   fse.mkdirp(outputDir)
 
   files
     .filter(file => file.endsWith('.js'))
     .forEach(file => {
-      const name = file.substr(0, file.length - 3).replace(/-([a-z])/g, g => g[1].toUpperCase())
+      const name = file.substr(0, file.length - 3).replace(/-([a-z])/g, g => g[ 1 ].toUpperCase())
       builds.push({
         rollup: {
           input: {
-            input: pathResolve(`../src/components/${type}/${file}`),
+            input: pathResolve(`../src/components/${ type }/${ file }`),
             plugins
           },
           output: {
-            file: addExtension(pathResolve(`../dist/${type}/${file}`), 'umd'),
+            file: addExtension(pathResolve(`../dist/${ type }/${ file }`), 'umd'),
             format: 'umd',
-            name: `ExampleViewer.${injectName}.${name}`
+            name: `ExampleViewer.${ injectName }.${ name }`
           }
         },
         build: {
@@ -218,9 +218,9 @@ function injectVueRequirement (code) {
   }
   `
 
-  return code.substring(0, index - 1) +
-    checkMe +
-    code.substring(index)
+  return code.substring(0, index - 1)
+    + checkMe
+    + code.substring(index)
 }
 
 function buildEntry (config) {
@@ -229,8 +229,8 @@ function buildEntry (config) {
     .then(bundle => bundle.generate(config.rollup.output))
     .then(({ output }) => {
       const code = config.rollup.output.format === 'umd'
-        ? injectVueRequirement(output[0].code)
-        : output[0].code
+        ? injectVueRequirement(output[ 0 ].code)
+        : output[ 0 ].code
 
       return config.build.unminified
         ? buildUtils.writeFile(config.rollup.output.file, code)
