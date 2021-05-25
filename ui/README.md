@@ -109,7 +109,7 @@ Here is an example for `quasar.conf.js`:
 ```
 
 # Defaults
-Instead of passing `locationUrl`, `jsPaths` and `cssPaths` each time the component is used, you can now set defaults:
+Instead of passing `locationUrl`, `jsPaths`, `cssPaths` and `noEdit` each time the component is used, you can now set defaults:
 
 ```js
 import ExampleViewer, { setDefaults } from 'quasar-ui-example-viewer/src/index.js'
@@ -120,7 +120,8 @@ setDefaults({
   cssPaths: [
     `https://cdn.jsdelivr.net/npm/@quasar/quasar-ui-qcalendar@${ version }/dist/index.min.css`,
     'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.0/css/all.css'
-  ]
+  ],
+  noEdit: true
 })
 
 export default boot(({ app }) => {
