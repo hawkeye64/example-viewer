@@ -1,4 +1,3 @@
-
 import ExampleViewer, { setDefaults } from './components/ExampleViewer.js'
 import pkg from '../package.json'
 const { version } = pkg
@@ -14,7 +13,7 @@ export default {
   ExampleViewer,
   setDefaults,
 
-  install (Vue) {
-    Vue.component(ExampleViewer.name, ExampleViewer)
+  install (app) {
+    app.component(ExampleViewer.name, ExampleViewer)
   }
 }
