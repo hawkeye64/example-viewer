@@ -21,6 +21,14 @@
         "file=\"MonthViewBasic\""
       ]
     },
+    "import-name": {
+      "type": "Array",
+      "desc": "An array of objects containing `to` and `from` strings naming your external imports for CodePen",
+      "category": "content",
+      "examples": [
+        "import-name=\"[ { from: \"@quasar/quasar-ui-qflashcard\", to: \"QFlashcard\" } ]\""
+      ]
+    },
     "tooltip-label": {
       "type": "String",
       "desc": "The tooltip to be used for the label",

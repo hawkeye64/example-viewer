@@ -35,14 +35,16 @@ const defaults = {
   locationUrl: ref(null),
   jsPaths: ref([]),
   cssPaths: ref([]),
-  noEdit: ref(false)
+  noEdit: ref(false),
+  importName: ref(null)
 }
 
-export const setDefaults = ({ locationUrl, jsPaths, cssPaths, noEdit }) => {
+export const setDefaults = ({ locationUrl, jsPaths, cssPaths, noEdit, importName }) => {
   if (locationUrl !== undefined) defaults.locationUrl.value = locationUrl
   if (jsPaths !== undefined) defaults.jsPaths.value.splice(0, defaults.jsPaths.value.length, jsPaths)
   if (cssPaths !== undefined) defaults.cssPaths.value.splice(0, defaults.cssPaths.value.length, cssPaths)
   if (noEdit !== undefined) defaults.noEdit.value = noEdit
+  if (importName !== undefined) defaults.importName.value = importName
 }
 
 export default defineComponent({
@@ -58,6 +60,7 @@ export default defineComponent({
       required: true,
       validator: v => v.length > 0
     },
+    importName: Array,
     codepenTitle: String,
     jsPaths: Array,
     cssPaths: Array,
@@ -112,6 +115,10 @@ export default defineComponent({
 
     const parsedNoEdit = computed(() => {
       return props.noEdit || defaults.noEdit.value
+    })
+
+    const parsedImportName = computed(() => {
+      return props.importName || defaults.importName.value
     })
 
     const parsedCopyIcon = computed(() => {
@@ -416,7 +423,8 @@ export default defineComponent({
         title: props.title,
         slugifiedTitle: parsedSlugifiedTitle.value,
         jsPaths: props.jsPaths || defaults.jsPaths.value,
-        cssPaths: props.cssPaths || defaults.cssPaths.value
+        cssPaths: props.cssPaths || defaults.cssPaths.value,
+        importName: parsedImportName.value
       })
     }
 
