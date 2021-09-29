@@ -5,7 +5,8 @@ import {
   onBeforeMount,
   ref,
   reactive,
-  markRaw
+  markRaw,
+  getCurrentInstance
 } from 'vue'
 
 import {
@@ -92,7 +93,8 @@ export default defineComponent({
         tabs: [],
         parts: {}
       }),
-      $q = useQuasar(),
+      vm = getCurrentInstance(),
+      $q = useQuasar() || vm.proxy.$q || vm.ctx.$q,
       currentTab = ref('template'),
       expanded = ref(false),
       codepenRef = ref(null)
