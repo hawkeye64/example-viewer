@@ -111,7 +111,7 @@ export default defineComponent({
     })
 
     const parsedNoEdit = computed(() => {
-      return props.noEdit || defaults.noEdit
+      return props.noEdit || defaults.noEdit.value
     })
 
     const parsedCopyIcon = computed(() => {
