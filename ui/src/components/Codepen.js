@@ -75,15 +75,15 @@ export default defineComponent({
       return lang ? lang[ 1 ] : 'none'
     })
 
-    const replaceImports = computed(() => {
-      return replace(props.importName ? props.importName[ 0 ].from : '')
-    })
+    // const replaceImports = computed(() => {
+    //   return replace(props.importName ? props.importName[ 0 ].from : '')
+    // })
 
     const js = computed(() => {
       const quasarImports = /import\s+{([^}'\n]+)}\s+from\s+'quasar'/g
       const vueImports = /import\s+{([^}'\n]+)}\s+from\s+'vue'/g
-      const namedImports = /import\s+{([^}'\n]+)}\s+from\s/g.exec(props.importName ? props.importName.to : '')
-      const otherImports = /import ([^'\n]*) from ([^\n]*)/g
+      // const namedImports = /import\s+{([^}'\n]+)}\s+from\s/g.exec(props.importName ? props.importName.to : '')
+      // const otherImports = /import ([^'\n]*) from ([^\n]*)/g
       let component = /export default {([\s\S]*)}/g.exec(def.parts.script || '')
 
       component = ((component && component[ 1 ]) || '').trim()
@@ -95,21 +95,20 @@ export default defineComponent({
       script = ((script && script[ 1 ]) || '')
         .replace(quasarImports, replaceQuasarImports)
         .replace(vueImports, replaceVueImports)
-        .replace(namedImports, replaceImports)
+        // .replace(namedImports, replaceImports)
         // .replace(namedImports, replace(props.importName))
-        .replace(otherImports, '')
+        // .replace(otherImports, '')
         .trim()
 
-      const other = props.importName.map(name => {
-        const val = 'app.use(' + name.to + ')'
-        return val
-      }).join('\n')
+      // const other = props.importName.map(name => {
+      //   const val = 'app.use(' + name.to + ')'
+      //   return val
+      // }).join('\n')
       script += script ? '\n\n' : ''
       return script
         + `const app = Vue.createApp({${ component }})
 
 app.use(Quasar, { config: {} })
-${ other }
 app.mount('#q-app')
 `
     })
