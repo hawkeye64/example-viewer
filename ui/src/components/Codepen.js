@@ -47,14 +47,14 @@ export default defineComponent({
     const cssResources = computed(() => {
       return [
         'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons',
-        'https://cdn.jsdelivr.net/npm/quasar@next/dist/quasar.min.css'
+        'https://cdn.jsdelivr.net/npm/quasar@2/dist/quasar.min.css'
       ].concat(props.cssPaths).join(';')
     })
 
     const jsResources = computed(() => {
       return [
         'https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js',
-        'https://cdn.jsdelivr.net/npm/quasar@next/dist/quasar.umd.min.js'
+        'https://cdn.jsdelivr.net/npm/quasar@2/dist/quasar.umd.min.js'
       ].concat(props.jsPaths).join(';')
     })
 
